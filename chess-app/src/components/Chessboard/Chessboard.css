@@ -8,15 +8,3 @@
     background-color: blue;
 }
 
-#chessboard .tile {
-    width: 100px;
-    height: 100px;
-}
-
-#chessboard .black-tile {
-    background-color: olivedrab;
-}
-
-#chessboard .white-tile {
-    background-color: cornsilk;
-}
