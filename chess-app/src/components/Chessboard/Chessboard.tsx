@@ -10,8 +10,10 @@ interface Piece {
     y: number
 }
 
+//This is a pieces object with a Piece Interface!
 const pieces: Piece[] = [];
 
+//duplicates pawn image 8 times across the board
 for(let i = 0; i <8; i++) {
     pieces.push({image: "assets/images/pawn-black.png", x: i, y: 6});
 }
@@ -20,8 +22,7 @@ for(let i = 0; i <8; i++) {
     pieces.push({image: "assets/images/pawn-white.png", x: i, y: 1});
 }
 
-//pieces.push({image: "assets/images/pawn-black.png", x: 0, y: 6})
-
+//assigns an image to every Piece.image. AND assigns image to every coordinate in board.
 export default function Chessboard() {
     let board = [];
 
