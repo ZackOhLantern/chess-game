@@ -1,3 +1,4 @@
+import React from "react";
 import Tile from "../Tile/Tile";
 import './Chessboard.css';
 
@@ -40,7 +41,18 @@ for(let i = 0; i <8; i++) {
     pieces.push({image: "assets/images/pawn-white.png", x: i, y: 1});
 }
 
+function grabPiece (e: React.MouseEvent<HTMLDivElement, MouseEvent>){
+    const element = e.target as HTMLElement;
+    if(element.classList.contains("chess-piece")) {
+        console.log(e);
 
+        const x = e.clientX - 50;
+        const y = e.clientY - 50;
+        element.style.position = "absolute";
+        element.style.left = `${x}px`;
+        element.style.top = `${y}px`;
+    }    
+}
 
 //assigns an image to every Piece.image. AND assigns image to every coordinate in board.
  export default function Chessboard() {
@@ -58,11 +70,10 @@ for(let i = 0; i <8; i++) {
             })
 
 
-            
+
             board.push(<Tile key= {`${j},${i}`}image={image} number={number} />);
         }
     }
-    return <div id="chessboard">{board}     
+    return <div onMouseDown={ e=> grabPiece(e) } id="chessboard">{board}     
     </div>
 } 
-//timestamp 16:51
