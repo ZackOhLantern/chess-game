@@ -41,17 +41,30 @@ for(let i = 0; i <8; i++) {
     pieces.push({image: "assets/images/pawn-white.png", x: i, y: 1});
 }
 
+let activePiece: HTMLElement | null = null;
+
 function grabPiece (e: React.MouseEvent<HTMLDivElement, MouseEvent>){
     const element = e.target as HTMLElement;
     if(element.classList.contains("chess-piece")) {
-        console.log(e);
+    const x = e.clientX - 50;
+    const y = e.clientY - 50;
+    element.style.position = "absolute";
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
 
+    activePiece = element;
+
+    }    
+}
+
+function movePiece(e: React.MouseEvent) {
+    if(activePiece) {
         const x = e.clientX - 50;
         const y = e.clientY - 50;
-        element.style.position = "absolute";
-        element.style.left = `${x}px`;
-        element.style.top = `${y}px`;
-    }    
+        activePiece.style.position = "absolute";
+        activePiece.style.left = `${x}px`;
+        activePiece.style.top = `${y}px`;
+    } 
 }
 
 //assigns an image to every Piece.image. AND assigns image to every coordinate in board.
@@ -74,6 +87,8 @@ function grabPiece (e: React.MouseEvent<HTMLDivElement, MouseEvent>){
             board.push(<Tile key= {`${j},${i}`}image={image} number={number} />);
         }
     }
-    return <div onMouseDown={ e=> grabPiece(e) } id="chessboard">{board}     
+    return ( 
+    <div onMouseMove= {(e) => movePiece(e)}  onMouseDown={ e=> grabPiece(e) } id="chessboard">{board}     
     </div>
+    );
 } 
