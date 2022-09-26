@@ -43,6 +43,7 @@ for(let i = 0; i <8; i++) {
 
 let activePiece: HTMLElement | null = null;
 
+//grab piece
 function grabPiece (e: React.MouseEvent<HTMLDivElement, MouseEvent>){
     const element = e.target as HTMLElement;
     if(element.classList.contains("chess-piece")) {
@@ -56,7 +57,7 @@ function grabPiece (e: React.MouseEvent<HTMLDivElement, MouseEvent>){
 
     }    
 }
-
+//move piece
 function movePiece(e: React.MouseEvent) {
     if(activePiece) {
         const x = e.clientX - 50;
@@ -66,6 +67,13 @@ function movePiece(e: React.MouseEvent) {
         activePiece.style.top = `${y}px`;
     } 
 }
+
+function dropPiece(e: React.MouseEvent) {
+    if(activePiece) {
+        activePiece = null;
+    }
+}
+
 
 //assigns an image to every Piece.image. AND assigns image to every coordinate in board.
  export default function Chessboard() {
@@ -88,7 +96,11 @@ function movePiece(e: React.MouseEvent) {
         }
     }
     return ( 
-    <div onMouseMove= {(e) => movePiece(e)}  onMouseDown={ e=> grabPiece(e) } id="chessboard">{board}     
+    <div 
+        onMouseMove= {(e) => movePiece(e)}  
+        onMouseDown={ e=> grabPiece(e) } 
+        onMouseUp= { e=> dropPiece(e)}
+        id="chessboard">{board}     
     </div>
     );
 } 
